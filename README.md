@@ -1,4 +1,25 @@
-# SuperSplat Editor
+# SVG Genie Splat Studio
+
+SVG Genie Splat Studio is SVG Genie's browser-based workspace for inspecting,
+cleaning, optimizing, rendering and exporting 3D Gaussian splats.
+
+This project is maintained as a product fork of
+[PlayCanvas SuperSplat](https://github.com/playcanvas/supersplat). The original
+project and this fork are available under the MIT license. The `upstream` Git
+remote should continue to point to PlayCanvas so stability and format updates
+can be merged regularly.
+
+Production: [svggenie.com/splat-studio](https://www.svggenie.com/splat-studio/)
+
+## SVG Genie changes
+
+- SVG Genie identity, metadata and electric-violet interaction color
+- Production builds without source maps or unused store screenshots
+- Safer startup, popup links, remote `load` URLs and drag-and-drop handling
+- Versioned service-worker cache with reliable upgrades and offline fallback
+- Direct handoff to SVG Genie's Image to 3D generator
+
+## Upstream project
 
 [![Github Release](https://img.shields.io/github/v/release/playcanvas/supersplat)](https://github.com/playcanvas/supersplat/releases)
 [![License](https://img.shields.io/github/license/playcanvas/supersplat)](https://github.com/playcanvas/supersplat/blob/main/LICENSE)
@@ -18,13 +39,14 @@ To learn more about using SuperSplat, please refer to the [User Guide](https://d
 
 ## Local Development
 
-To initialize a local development environment for SuperSplat, ensure you have [Node.js](https://nodejs.org/) 18 or later installed. Follow these steps:
+To initialize a local development environment, use Node.js 20.19 or later:
 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/playcanvas/supersplat.git
-   cd supersplat
+   git clone https://github.com/anaghkanungo7/supersplat.git svggenie-splat-studio
+   cd svggenie-splat-studio
+   git remote add upstream https://github.com/playcanvas/supersplat.git
    ```
 
 2. Install dependencies:
@@ -33,7 +55,7 @@ To initialize a local development environment for SuperSplat, ensure you have [N
    npm install
    ```
 
-3. Build SuperSplat and start a local web server:
+3. Build Splat Studio and start a local web server:
 
    ```sh
    npm run develop
@@ -48,7 +70,13 @@ To initialize a local development environment for SuperSplat, ensure you have [N
 
 5. Navigate to `http://localhost:3000`
 
-When changes to the source are detected, SuperSplat is rebuilt automatically. Simply refresh your browser to see your changes.
+When changes to the source are detected, the studio is rebuilt automatically.
+
+For the production bundle mounted by SVG Genie:
+
+```sh
+BASE_HREF=/splat-studio/ npm run build
+```
 
 ## Localizing the SuperSplat Editor
 

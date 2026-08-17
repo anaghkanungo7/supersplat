@@ -31,7 +31,7 @@ const outputHeader = () => {
     const RESET_OUT = '\x1b[0m';
 
     const title = [
-        'Building SuperSplat',
+        'Building SVG Genie Splat Studio',
         `type ${BOLD_OUT}${BUILD_TYPE}${REGULAR_OUT}`
     ].map(l => `${BLUE_OUT}${l}`).join('\n');
     console.log(`${BLUE_OUT}${title}${RESET_OUT}\n`);
@@ -44,7 +44,7 @@ const application = {
     output: {
         dir: 'dist',
         format: 'esm',
-        sourcemap: true
+        sourcemap: BUILD_TYPE !== 'release'
     },
     plugins: [
         copyAndWatch({
@@ -56,8 +56,8 @@ const application = {
                     }
                 },
                 { src: 'src/manifest.json' },
-                { src: 'static/images', dest: 'static' },
-                { src: 'static/icons', dest: 'static' },
+                { src: 'LICENSE', destFilename: 'LICENSE.supersplat.txt' },
+                { src: 'static/icons/svg-genie.svg', dest: 'static/icons' },
                 { src: 'static/lib', dest: 'static' },
                 { src: 'static/locales', dest: 'static' },
                 { src: 'static/env/VertebraeHDRI_v1_512.png', dest: 'static/env' }
@@ -70,13 +70,15 @@ const application = {
             }
         }),
         typescript({
-            tsconfig: './tsconfig.json'
+            tsconfig: './tsconfig.json',
+            sourceMap: BUILD_TYPE !== 'release',
+            inlineSources: BUILD_TYPE !== 'release'
         }),
         resolve(),
         image({ dom: false }),
         json(),
         scss({
-            sourceMap: true,
+            sourceMap: BUILD_TYPE !== 'release',
             runtime: sass,
             processor: (css) => {
                 return postcss([autoprefixer])
@@ -103,12 +105,15 @@ const serviceWorker = {
     output: {
         dir: 'dist',
         format: 'esm',
-        sourcemap: true
+        sourcemap: BUILD_TYPE !== 'release'
     },
     plugins: [
         resolve(),
         json(),
-        typescript()
+        typescript({
+            sourceMap: BUILD_TYPE !== 'release',
+            inlineSources: BUILD_TYPE !== 'release'
+        })
         // BUILD_TYPE !== 'debug' && terser()
     ],
     treeshake: 'smallest',

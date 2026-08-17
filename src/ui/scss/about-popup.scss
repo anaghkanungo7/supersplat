@@ -57,6 +57,10 @@
 
         svg {
             display: block;
+
+            path[fill='#f26722'] {
+                fill: $clr-hilight;
+            }
         }
     }
 
@@ -76,7 +80,7 @@
     #about-app-name {
         margin: 0;
         font-family: 'Proxima Nova Bold', 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 700;
         color: $text-primary;
     }
@@ -108,7 +112,7 @@
         transition: background-color 0.15s ease;
 
         &:hover {
-            background-color: rgba(246, 102, 44, 0.15);
+            background-color: rgba(134, 0, 239, 0.15);
 
             .about-dep-name {
                 color: $clr-hilight;

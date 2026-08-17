@@ -51,7 +51,7 @@ class AboutPopup extends Container {
         // Header bar
         const header = new Label({
             id: 'about-header',
-            text: 'About'
+            text: 'About SVG Genie Splat Studio'
         });
 
         // Content area
@@ -65,7 +65,7 @@ class AboutPopup extends Container {
         });
         logoContainer.dom.innerHTML = logoSvg;
         logoContainer.dom.addEventListener('click', () => {
-            window.open('https://github.com/playcanvas/supersplat', '_blank')?.focus();
+            window.open('https://www.svggenie.com', '_blank')?.focus();
         });
 
         // App name and version
@@ -73,12 +73,12 @@ class AboutPopup extends Container {
             id: 'about-app-info'
         });
         appInfo.dom.addEventListener('click', () => {
-            window.open('https://github.com/playcanvas/supersplat', '_blank')?.focus();
+            window.open('https://github.com/anaghkanungo7/supersplat', '_blank')?.focus();
         });
 
         const appName = new Label({
             id: 'about-app-name',
-            text: 'SuperSplat'
+            text: 'SVG Genie Splat Studio'
         });
 
         const appVersionLabel = new Label({
@@ -93,6 +93,15 @@ class AboutPopup extends Container {
         const depsContainer = new Container({
             id: 'about-deps'
         });
+
+        const upstreamRow = new Container({
+            class: 'about-dep-row'
+        });
+        upstreamRow.dom.addEventListener('click', () => {
+            window.open('https://github.com/playcanvas/supersplat', '_blank')?.focus();
+        });
+        upstreamRow.append(new Label({ class: 'about-dep-name', text: 'SuperSplat' }));
+        upstreamRow.append(new Label({ class: 'about-dep-version', text: 'Open-source foundation' }));
 
         // PCUI
         const pcuiRow = new Container({
@@ -122,6 +131,7 @@ class AboutPopup extends Container {
         engineRow.append(engineVer);
         engineRow.append(engineRev);
 
+        depsContainer.append(upstreamRow);
         depsContainer.append(pcuiRow);
         depsContainer.append(engineRow);
 

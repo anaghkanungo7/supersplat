@@ -282,10 +282,18 @@ const main = async () => {
     const loadList = url.searchParams.getAll('load');
     const filenameList = url.searchParams.getAll('filename');
     for (const [i, value] of loadList.entries()) {
-        const decoded = decodeURIComponent(value);
+        // URLSearchParams already decodes values. Decoding a second time can
+        // corrupt valid signed URLs or throw on literal percent characters.
+        const decoded = value;
+        let fallbackFilename = 'scene.ply';
+        try {
+            fallbackFilename = new URL(decoded, window.location.href).pathname.split('/').pop() || fallbackFilename;
+        } catch {
+            // The loader will present a useful error for malformed URLs.
+        }
         const filename = i < filenameList.length ?
-            decodeURIComponent(filenameList[i]) :
-            decoded.split('/').pop();
+            filenameList[i] :
+            fallbackFilename;
 
         await events.invoke('import', [{
             filename,

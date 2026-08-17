@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>SuperSplat</title>
+        <title>SVG Genie Splat Studio</title>
         <meta charset="utf-8" />
         <base href="__BASE_HREF__">
         <link rel="manifest" href="./manifest.json">
         <link rel="stylesheet" href="./index.css">
-        <link rel="shortcut icon" href="#">
-        <meta name="description" content="SuperSplat is an advanced browser-based editor for manipulating and optimizing 3D Gaussian Splats. It is open source and engine agnostic." />
+        <link rel="shortcut icon" href="./static/icons/svg-genie.svg" type="image/svg+xml">
+        <meta name="theme-color" content="#8600ef" />
+        <meta name="description" content="SVG Genie Splat Studio is a browser-based editor for inspecting, cleaning, optimizing and exporting 3D Gaussian splats." />
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
         <!-- Service worker -->
         <script>
             const sw = navigator.serviceWorker;
-            if (sw) {
+            if (sw && window.isSecureContext) {
                 sw.register('./sw.js')
                     .then(reg => console.log('service worker registered', reg))
                     .catch(err => console.log('failed to register service worker', err));

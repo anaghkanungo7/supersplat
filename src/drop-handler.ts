@@ -85,24 +85,26 @@ const CreateDropHandler = (target: HTMLElement, dropHandler: DropHandlerFunc) =>
     const dragstart = (ev: DragEvent) => {
         ev.preventDefault();
         ev.stopPropagation();
-        ev.dataTransfer.effectAllowed = 'all';
+        if (ev.dataTransfer) ev.dataTransfer.effectAllowed = 'all';
     };
 
     const dragover = (ev: DragEvent) => {
         ev.preventDefault();
         ev.stopPropagation();
-        ev.dataTransfer.effectAllowed = 'all';
+        if (ev.dataTransfer) ev.dataTransfer.effectAllowed = 'all';
     };
 
     const drop = async (ev: DragEvent) => {
         ev.preventDefault();
 
-        const items = Array.from(ev.dataTransfer.items);
+        const items = Array.from(ev.dataTransfer?.items ?? []);
+        if (items.length === 0) return;
 
         // handle single file drops so documents can propagate the filesystemfilehandle
         if (items.length === 1) {
             const item = items[0];
-            if (item.getAsFileSystemHandle && item.webkitGetAsEntry().isFile) {
+            const entry = item.webkitGetAsEntry?.();
+            if (item.getAsFileSystemHandle && entry?.isFile) {
                 const handle = await item.getAsFileSystemHandle();
                 if (handle?.kind === 'file') {
                     const fileHandle = handle as FileSystemFileHandle;
@@ -116,8 +118,8 @@ const CreateDropHandler = (target: HTMLElement, dropHandler: DropHandlerFunc) =>
 
         // Map to entries first
         const entries = items
-        .map(item => item.webkitGetAsEntry())
-        .filter(v => v);
+        .map(item => item.webkitGetAsEntry?.())
+        .filter((entry): entry is FileSystemEntry => !!entry);
 
         // resolve directories to files
         const resolvedEntries = await resolveDirectories(entries);

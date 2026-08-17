@@ -174,7 +174,13 @@ class Popup extends Container {
 
             linkRow.hidden = link === undefined;
             if (link !== undefined) {
-                linkText.dom.innerHTML = `<a href='${link}' target='_blank'>${link}</a>`;
+                linkText.dom.replaceChildren();
+                const anchor = document.createElement('a');
+                anchor.href = link;
+                anchor.target = '_blank';
+                anchor.rel = 'noopener noreferrer';
+                anchor.textContent = link;
+                linkText.dom.appendChild(anchor);
                 linkCopy.icon = 'E352';
             }
 
@@ -226,8 +232,11 @@ class Popup extends Container {
                     }
                 };
                 copyFn = () => {
-                    navigator.clipboard.writeText(link);
-                    linkCopy.icon = 'E348';
+                    navigator.clipboard.writeText(link).then(() => {
+                        linkCopy.icon = 'E348';
+                    }).catch((error) => {
+                        console.error('Could not copy link:', error);
+                    });
                 };
             });
         };

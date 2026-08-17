@@ -211,10 +211,9 @@ class Menu extends Container {
             icon: createSvg(sceneExport),
             subMenu: exportMenuPanel
         }, {
-            text: () => i18n.t('menu.file.publish', { ellipsis: true }),
+            text: 'Generate with SVG Genie',
             icon: createSvg(scenePublish),
-            isEnabled: () => !events.invoke('scene.empty'),
-            onSelect: async () => await events.invoke('show.publishSettingsDialog')
+            onSelect: () => window.open('/tools/image-to-3d-model', '_top')?.focus()
         }]);
 
         // track undo/redo availability for menu item enablement
@@ -347,11 +346,11 @@ class Menu extends Container {
         }, {
             text: () => i18n.t('menu.help.github-repo'),
             icon: 'E259',
-            onSelect: () => window.open('https://github.com/playcanvas/supersplat', '_blank')?.focus()
+            onSelect: () => window.open('https://github.com/anaghkanungo7/supersplat', '_blank')?.focus()
         }, {
             text: () => i18n.t('menu.help.log-issue'),
             icon: 'E336',
-            onSelect: () => window.open('https://github.com/playcanvas/supersplat/issues', '_blank')?.focus()
+            onSelect: () => window.open('https://github.com/anaghkanungo7/supersplat/issues', '_blank')?.focus()
         }, {
             // separator
         }, {
