@@ -211,9 +211,9 @@ class Menu extends Container {
             icon: createSvg(sceneExport),
             subMenu: exportMenuPanel
         }, {
-            text: 'Generate with SVG Genie',
+            text: 'Text to Splat…',
             icon: createSvg(scenePublish),
-            onSelect: () => window.open('/tools/image-to-3d-model', '_top')?.focus()
+            onSelect: () => events.fire('show.generateSplat')
         }]);
 
         // track undo/redo availability for menu item enablement

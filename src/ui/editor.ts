@@ -8,6 +8,7 @@ import { BottomToolbar } from './bottom-toolbar';
 import { CameraInfoOverlay } from './camera-info-overlay';
 import { ColorPanel } from './color-panel';
 import { ExportPopup } from './export-popup';
+import { GenerateSplatDialog } from './generate-splat-dialog';
 import { ImageSettingsDialog } from './image-settings-dialog';
 import { i18n } from './localization';
 import { Menu } from './menu';
@@ -152,6 +153,7 @@ class EditorUI {
 
         // export popup
         const exportPopup = new ExportPopup(events);
+        const generateSplatDialog = new GenerateSplatDialog(events);
 
         // publish settings
         const publishSettingsDialog = new PublishSettingsDialog(events);
@@ -167,6 +169,7 @@ class EditorUI {
 
         topContainer.append(popup);
         topContainer.append(exportPopup);
+        topContainer.append(generateSplatDialog);
         topContainer.append(publishSettingsDialog);
         topContainer.append(imageSettingsDialog);
         topContainer.append(videoSettingsDialog);

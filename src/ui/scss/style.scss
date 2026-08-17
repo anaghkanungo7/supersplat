@@ -341,3 +341,71 @@ body {
         background: transparent;
     }
 }
+
+#generate-splat-popup {
+    position: absolute;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.72);
+
+    &.pcui-hidden { display: none; }
+}
+
+#generate-splat-dialog {
+    box-sizing: border-box;
+    width: min(520px, calc(100vw - 32px));
+    padding: 28px;
+    border: 1px solid $bcg-lighter;
+    color: $text-primary;
+    background: $bcg-primary;
+    box-shadow: 12px 12px 0 rgba(134, 0, 239, 0.28);
+}
+
+.generate-splat-eyebrow,
+.generate-splat-meta {
+    margin: 0;
+    color: $clr-icon-hilight;
+    font: 700 11px/1.4 monospace;
+    letter-spacing: 0.1em;
+}
+
+#generate-splat-title { margin: 8px 0 12px; font-size: 30px; line-height: 1; }
+.generate-splat-description { margin: 0 0 18px; color: $text-secondary; line-height: 1.5; }
+#generate-splat-prompt {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 108px;
+    padding: 14px;
+    resize: vertical;
+    border: 1px solid $bcg-lighter;
+    border-radius: 0;
+    outline: none;
+    color: $text-primary;
+    background: $bcg-darkest;
+    font: 14px/1.5 sans-serif;
+
+    &:focus { border-color: $clr-hilight; box-shadow: 0 0 0 1px $clr-hilight; }
+}
+.generate-splat-meta { margin-top: 10px; color: $text-dark; letter-spacing: 0.04em; }
+#generate-splat-status { min-height: 20px; margin-top: 16px; color: $clr-icon-hilight; font: 700 12px/1.4 monospace; }
+.generate-splat-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+
+    .pcui-button { height: auto; margin: 0; padding: 11px 16px; border: 1px solid $bcg-lighter; color: $text-primary; font-weight: 700; line-height: 1.2; cursor: pointer; }
+    .pcui-button.pcui-disabled { cursor: wait; opacity: 0.55; }
+}
+.generate-splat-cancel { background: $bcg-dark; }
+.generate-splat-submit { border-color: $clr-hilight !important; background: $clr-hilight; }
+
+@media (max-width: 600px) {
+    #generate-splat-dialog { padding: 22px; }
+    #generate-splat-title { font-size: 25px; }
+    .generate-splat-actions { flex-direction: column-reverse; }
+}
